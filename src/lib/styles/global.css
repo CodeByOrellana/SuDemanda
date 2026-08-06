@@ -1,0 +1,154 @@
+:root {
+	--bg-primary: #2b5257;
+	--blue-primary: #0266c1;
+	--blue-dark: #073461;
+	--blue-light: #1886e8;
+	--silver-light: #d1d8df;
+	--silver-dark: #83919e;
+	--text-white: #ffffff;
+	--font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 4.5rem;
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-base);
+	line-height: 1.6;
+	color: var(--blue-dark);
+	background-color: var(--text-white);
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.2;
+	margin: 0 0 0.5rem;
+	color: var(--blue-dark);
+}
+
+p {
+	margin: 0 0 1rem;
+}
+
+a {
+	color: var(--blue-light);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img,
+svg {
+	max-width: 100%;
+	display: block;
+}
+
+ul,
+ol {
+	padding-left: 1.25rem;
+}
+
+section {
+	padding: 4rem 1.5rem;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem 1.5rem;
+	background-color: var(--bg-primary);
+	color: var(--text-white);
+}
+
+header nav {
+	display: flex;
+	gap: 1.25rem;
+}
+
+header a {
+	color: var(--text-white);
+	font-weight: 600;
+}
+
+header a:hover {
+	color: var(--blue-light);
+	text-decoration: none;
+}
+
+header button {
+	display: none;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--silver-light);
+	border-radius: 0.375rem;
+	background: transparent;
+	color: var(--text-white);
+	cursor: pointer;
+}
+
+footer {
+	padding: 3rem 1.5rem;
+	background-color: var(--bg-primary);
+	color: var(--text-white);
+}
+
+footer a {
+	color: var(--silver-light);
+}
+
+footer a:hover {
+	color: var(--text-white);
+}
+
+main section > h2 {
+	color: var(--blue-dark);
+}
+
+button[type='submit'] {
+	padding: 0.625rem 1.25rem;
+	border: none;
+	border-radius: 0.375rem;
+	background-color: var(--blue-primary);
+	color: var(--text-white);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+button[type='submit']:hover {
+	background-color: var(--blue-dark);
+}
+
+@media (max-width: 640px) {
+	header nav {
+		display: none;
+	}
+
+	header button {
+		display: inline-block;
+	}
+}
