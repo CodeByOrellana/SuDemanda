@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { site } from '$lib/content.svelte';
-	import oficina from '$lib/assets/oficina.jpg';
+	import oficina from '$lib/assets/oficina.png';
 
 	let { id = 'contacto' }: { id?: string } = $props();
 

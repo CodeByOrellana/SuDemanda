@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { site } from '$lib/content.svelte';
 	import escudo from '$lib/assets/escudo.svg';
-	import oficina from '$lib/assets/oficina.jpg';
+	import oficina from '$lib/assets/oficina.png';
 
 	let { titulo = '', subtitulo = '', cta = 'Agenda tu consulta' }: { titulo?: string; subtitulo?: string; cta?: string } = $props();
 </script>
