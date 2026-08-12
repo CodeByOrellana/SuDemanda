@@ -7,7 +7,7 @@
 
 <Hero
 	titulo="Asesoría legal cercana y comprometida"
-	subtitulo="Abogados en Chile que te guían en cada etapa de tu caso, con claridad y resultados."
+	subtitulo="Abogado con basta experiencia ha trabajado en distintos Estudios Jurídicos de la ciudad de Santiago."
 	cta="Agenda una consulta gratuita"
 />
 
