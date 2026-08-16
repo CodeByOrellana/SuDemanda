@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { navItems, site } from '$lib/content.svelte';
+	import { fly } from 'svelte/transition';
 	import { onNavigate } from '$app/navigation';
 
 	let { id = 'header' }: { id?: string } = $props();
@@ -38,12 +39,24 @@
 		{/each}
 	</nav>
 
-	<button type="button" aria-expanded={abierto} aria-controls="menu-movil" onclick={toggle}>
-		{abierto ? 'Cerrar' : 'Menú'}
+	<button
+		type="button"
+		class="menu-toggle"
+		class:abierto
+		aria-expanded={abierto}
+		aria-controls="menu-movil"
+		aria-label={abierto ? 'Cerrar menú' : 'Abrir menú'}
+		onclick={toggle}
+	>
+		<span class="hamburger" aria-hidden="true">
+			<span></span>
+			<span></span>
+			<span></span>
+		</span>
 	</button>
 
 	{#if abierto}
-		<div id="menu-movil">
+		<div id="menu-movil" transition:fly={{ y: -8, duration: 150 }}>
 			{#each navItems as item (item.href)}
 				<a href={item.href} onclick={cerrar}>{item.label}</a>
 			{/each}

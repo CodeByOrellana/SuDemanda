@@ -4,7 +4,7 @@ export const site = {
 	lema: 'Defensa y asesoría legal a tu alcance',
 	email: 'leojuridico@gmail.com',
 	telefono: '+56 9 44170661',
-	direccion: 'Santiago, Chile'
+	direccion: '256 Sta. Lucía, 8320190 Santiago, Región Metropolitana'
 };
 
 export let servicios = $state([
