@@ -63,3 +63,9 @@
 		</div>
 	{/if}
 </header>
+
+<style>
+	header span {
+		font-size: 1.75rem;
+	}
+</style>

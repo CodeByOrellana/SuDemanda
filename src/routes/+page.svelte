@@ -7,7 +7,7 @@
 
 <Hero
 	titulo="Asesoría legal cercana y comprometida"
-	subtitulo="Abogado con basta experiencia ha trabajado en distintos Estudios Jurídicos de la ciudad de Santiago.op"
+	subtitulo="Abogado con basta experiencia ha trabajado en distintos Estudios Jurídicos de la ciudad de Santiago."
 	cta="Agenda una consulta gratuita"
 />
 

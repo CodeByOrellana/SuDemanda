@@ -6,7 +6,7 @@
 	--silver-light: #d1d8df;
 	--silver-dark: #83919e;
 	--text-white: #ffffff;
-	--font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	--font-base: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 }
 
 *,
@@ -23,6 +23,7 @@ html {
 body {
 	margin: 0;
 	font-family: var(--font-base);
+	font-size: 1.5rem;
 	line-height: 1.6;
 	color: var(--blue-dark);
 	background-color: var(--text-white);
