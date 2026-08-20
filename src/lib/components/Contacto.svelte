@@ -103,7 +103,7 @@
 		</div>
 
 		<div class="card info">
-			<h3>Donde encontrarme</h3>
+			<h3>¿Dónde nos encontramos?</h3>
 			<address class="direccion">{site.direccion}</address>
 			<Mapa lat={ubicacion.lat} lng={ubicacion.lng} />
 			<a
