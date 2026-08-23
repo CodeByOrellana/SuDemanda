@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { site } from '$lib/content.svelte';
 	import escudo from '$lib/assets/escudo.svg';
-	import oficina from '$lib/assets/oficina.png';
+	import banner from '$lib/assets/BannerOffice.png';
 
 	let { titulo = '', subtitulo = '', cta = 'Agenda tu consulta' }: { titulo?: string; subtitulo?: string; cta?: string } = $props();
 </script>
 
 <section id="inicio" aria-label="Presentación">
-	<div class="hero-bg" role="presentation" aria-hidden="true" style="background-image: url('{oficina}')"></div>
+	<div class="hero-bg" role="presentation" aria-hidden="true" style="background-image: url('{banner}')"></div>
 	<img class="escudo" src={escudo} alt="Escudo SuDemanda">
 	<div class="inicio-card">
 	<h1>{titulo || site.lema}</h1>
@@ -43,7 +43,7 @@
 		content: '';
 		position: absolute;
 		inset: 0;
-		background-color: rgba(43, 82, 87, 0.7);
+		background-color: rgba(27, 143, 215, 0.5);
 	}
 
 	.escudo {
