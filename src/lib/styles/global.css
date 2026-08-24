@@ -3,9 +3,15 @@
 	--blue-primary: #0266c1;
 	--blue-dark: #073461;
 	--blue-light: #1886e8;
+	--blue-section: #1c88e8;
+	--blue-section-light: #67b5fe;
+	--blue-card-text: #76b9f4;
 	--silver-light: #d1d8df;
 	--silver-dark: #83919e;
 	--text-white: #ffffff;
+	--text-light: #f4f3f2;
+	--error-red: #c0392b;
+	--error-text: #7f1d1d;
 	--font-base: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
 }
 

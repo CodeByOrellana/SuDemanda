@@ -19,7 +19,12 @@
 
 <style>
 	.servicios-proceso {
-		background: linear-gradient(180deg, #1c88e8 0%, #67b5fe 50%, #1c88e8 100%);
-		color: #f4f3f2;
+		background: linear-gradient(
+			180deg,
+			var(--blue-section) 0%,
+			var(--blue-section-light) 50%,
+			var(--blue-section) 100%
+		);
+		color: var(--text-light);
 	}
 </style>
