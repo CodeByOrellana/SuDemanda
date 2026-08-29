@@ -12,6 +12,14 @@ node_modules
 .DS_Store
 Thumbs.db
 
+# Docs locales
+/docs/
+
+# Agentes
+.agents/
+.opencode/
+AGENTS.md
+
 # Env
 .env
 .env.*
