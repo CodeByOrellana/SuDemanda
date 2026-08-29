@@ -11,6 +11,20 @@
 	cta="Agenda una consulta gratuita"
 />
 
-<Servicios />
-<Proceso />
+<div class="servicios-proceso">
+	<Servicios />
+	<Proceso />
+</div>
 <Contacto />
+
+<style>
+	.servicios-proceso {
+		background: linear-gradient(
+			180deg,
+			var(--blue-section) 0%,
+			var(--blue-section-light) 50%,
+			var(--blue-section) 100%
+		);
+		color: var(--text-light);
+	}
+</style>

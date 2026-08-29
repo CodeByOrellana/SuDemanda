@@ -255,6 +255,10 @@
 		margin-top: 0;
 	}
 
+	.card p {
+		color: var(--blue-card-text);
+	}
+
 	.card:hover {
 		transform: scale(1.05);
 		border-color: var(--blue-light);

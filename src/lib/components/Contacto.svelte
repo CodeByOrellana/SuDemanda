@@ -221,8 +221,8 @@
 	.error {
 		padding: 0.75rem 1rem;
 		border-radius: 0.375rem;
-		background-color: color-mix(in srgb, #c0392b 12%, var(--text-white));
-		color: #7f1d1d;
+		background-color: color-mix(in srgb, var(--error-red) 12%, var(--text-white));
+		color: var(--error-text);
 	}
 
 	button[type='submit'] {
