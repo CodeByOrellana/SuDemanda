@@ -13,6 +13,8 @@
 	--error-red: #c0392b;
 	--error-text: #7f1d1d;
 	--font-base: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+	--font-body: 'Merriweather', Georgia, serif;
+	--font-display: 'Playfair Display', Georgia, serif;
 }
 
 *,
@@ -46,7 +48,7 @@ h3 {
 
 p {
 	margin: 0 0 1rem;
-	font-family: 'Merriweather', Georgia, serif;
+	font-family: var(--font-body);
 	font-size: 1.25rem;
 }
 
