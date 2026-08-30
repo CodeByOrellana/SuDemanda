@@ -3,10 +3,11 @@
 </script>
 
 <section id={id} aria-labelledby="quienes-somos-titulo">
-	<div class="contenido">
+	<div class="panel-gris">
+		<div class="contenido">
 		<h2 id="quienes-somos-titulo">Quiénes Somos</h2>
 		<p class="lead">
-			SUDEMANDA Abogados es un estudio jurídico que ofrece asesoría legal personalizada,
+			Sudemanda Abogados es un estudio jurídico que ofrece asesoría legal personalizada,
 			integral y cercana, tanto en instancias judiciales como extrajudiciales.
 		</p>
 
@@ -48,6 +49,7 @@
 				</p>
 			</div>
 		</div>
+		</div>
 	</div>
 </section>
 
@@ -59,7 +61,7 @@
 
 	section h3,
 	.lead {
-		color: var(--text-white);
+		color: var(--blue-dark);
 	}
 
 	#quienes-somos h2 {
@@ -71,7 +73,7 @@
 	}
 
 	section p {
-		color: var(--text-light);
+		color: var(--blue-dark);
 	}
 
 	.bloques {

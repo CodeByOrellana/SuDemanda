@@ -14,10 +14,10 @@
 	{#if subtitulo}
 		<p>{subtitulo}</p>
 	{/if}
-	<div class="cta-group">
+	<!--<div class="cta-group">
 		<a href="#contacto">{cta}</a>
 		<a href="#servicios">Ver servicios</a>
-	</div>
+	</div>-->
 	</div>
 </section>
 

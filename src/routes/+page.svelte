@@ -27,6 +27,6 @@
 			var(--blue-section-light) 50%,
 			var(--blue-section) 100%
 		);
-		color: var(--text-light);
+		color: var(--blue-dark);
 	}
 </style>

@@ -5,7 +5,8 @@
 </script>
 
 <section id={id} aria-labelledby="proceso-titulo">
-	<div class="contenido">
+	<div class="panel-gris">
+		<div class="contenido">
 		<h2 id="proceso-titulo">Cómo trabajamos</h2>
 		<p>Un proceso claro y transparente, paso a paso.</p>
 
@@ -17,6 +18,7 @@
 				</li>
 			{/each}
 		</ol>
+		</div>
 	</div>
 </section>
 
@@ -24,5 +26,9 @@
 	.contenido {
 		max-width: 52rem;
 		margin: 0 auto;
+	}
+
+	li h3 {
+		color: var(--blue-dark);
 	}
 </style>

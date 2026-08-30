@@ -256,7 +256,11 @@
 	}
 
 	.card p {
-		color: var(--blue-card-text);
+		color: var(--blue-dark);
+	}
+
+	.card a {
+		color: var(--blue-dark);
 	}
 
 	.card:hover {
