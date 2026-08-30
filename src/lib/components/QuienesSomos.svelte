@@ -14,7 +14,7 @@
 			<div>
 				<h3>Fundación e Historia</h3>
 				<p>
-					SUDEMANDA Abogados surge el año 2008 tras la consolidación de la trayectoria de uno
+					Sudemanda Abogados surge el año 2008 tras la consolidación de la trayectoria de uno
 					de sus socios fundadores, proveniente de destacados estudios jurídicos de Santiago,
 					así como de organizaciones y empresas vinculadas a las áreas del Derecho Civil,
 					Familia, Penal y Comercial.
@@ -57,10 +57,13 @@
 		margin: 0 auto;
 	}
 
-	section h2,
 	section h3,
 	.lead {
 		color: var(--text-white);
+	}
+
+	#quienes-somos h2 {
+		color: var(--blue-dark);
 	}
 
 	.lead {
