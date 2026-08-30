@@ -2,6 +2,7 @@
 	import Hero from '$lib/components/Hero.svelte';
 	import Servicios from '$lib/components/Servicios.svelte';
 	import Proceso from '$lib/components/Proceso.svelte';
+	import QuienesSomos from '$lib/components/QuienesSomos.svelte';
 	import Contacto from '$lib/components/Contacto.svelte';
 </script>
 
@@ -11,14 +12,15 @@
 	cta="Agenda una consulta gratuita"
 />
 
-<div class="servicios-proceso">
+<div class="seccion-azul">
 	<Servicios />
 	<Proceso />
+	<QuienesSomos />
 </div>
 <Contacto />
 
 <style>
-	.servicios-proceso {
+	.seccion-azul {
 		background: linear-gradient(
 			180deg,
 			var(--blue-section) 0%,

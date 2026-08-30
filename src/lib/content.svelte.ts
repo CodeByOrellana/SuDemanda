@@ -1,8 +1,8 @@
 export const site = {
-	name: 'SuDemanda',
+	name: 'Sudemanda',
 	dominio: 'sudemanda.cl',
 	lema: 'Defensa y asesoría legal a tu alcance',
-	email: 'leojuridico@gmail.com',
+	email: 'contacto@sudemanda.cl',
 	telefono: '+56 9 44170661',
 	direccion: 'Santa Lucía 256, 8320190 Santiago, Región Metropolitana'
 };
@@ -42,7 +42,7 @@ export let servicios = $state([
 
 export let pasos = $state([
 	{
-		titulo: 'Cúentame tu caso',
+		titulo: 'Cúentanos tu caso',
 		descripcion: 'Agenda una consulta y describe tu situación legal.'
 	},
 	{
@@ -63,5 +63,6 @@ export let navItems = $state([
 	{ href: '#inicio', label: 'Inicio' },
 	{ href: '#servicios', label: 'Servicios' },
 	{ href: '#proceso', label: 'Cómo trabajamos' },
+	{ href: '#quienes-somos', label: 'Quiénes Somos' },
 	{ href: '#contacto', label: 'Contacto' }
 ]);
