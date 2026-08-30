@@ -52,14 +52,15 @@
 	}
 
 	.inicio-card {
-		background-color: var(--silver-light);
+		background-color: rgb(209 216 223 / 0.7);
+		border: 2px solid rgb(255 255 255 / 0.4);
 		border-radius: 0.5rem;
 		padding: 1.5rem;
 		max-width: 36rem;
 		margin: 0 auto;
 	}
 
-	.cta-group {
+/* 	.cta-group {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -78,5 +79,5 @@
 	.cta-group a:hover {
 		background-color: var(--blue-dark);
 		text-decoration: none;
-	}
+	} */
 </style>
