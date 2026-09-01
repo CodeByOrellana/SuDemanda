@@ -66,3 +66,5 @@ export let navItems = $state([
 	{ href: '#quienes-somos', label: 'Quiénes Somos' },
 	{ href: '#contacto', label: 'Contacto' }
 ]);
+
+export const ui = $state({ servicioInteres: '' });

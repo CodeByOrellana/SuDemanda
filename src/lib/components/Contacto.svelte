@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { site } from '$lib/content.svelte';
+	import { site, ui } from '$lib/content.svelte';
 	import oficina from '$lib/assets/oficina.png';
 	import Mapa from '$lib/components/Mapa.svelte';
 
@@ -17,6 +17,10 @@
 	let honey = $state('');
 	let enviando = $state(false);
 	let feedback = $state<{ ok: boolean; mensaje: string } | null>(null);
+
+	$effect(() => {
+		if (ui.servicioInteres) servicio = ui.servicioInteres;
+	});
 </script>
 
 <section id={id} aria-labelledby="contacto-titulo" style="background-image: url('{oficina}')">

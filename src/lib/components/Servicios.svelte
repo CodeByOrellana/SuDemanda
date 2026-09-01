@@ -1,15 +1,13 @@
 <script lang="ts">
-	import { servicios } from '$lib/content.svelte';
+	import { servicios, ui } from '$lib/content.svelte';
 
 	let { id = 'servicios' }: { id?: string } = $props();
 
 	let track = $derived([...servicios, ...servicios]);
 
-	const VELOCIDAD = 0.04;
+	const VELOCIDAD_SEG = 2.5;
 	let carrusel = $state<HTMLDivElement | null>(null);
-	let pausado = $state(false);
-	let arrastrando = $state(false);
-	let indiceActivo = $state(0);
+	let indiceCentro = $state(-1);
 	let reducedMotion = $state(false);
 
 	let ultimoT = 0;
@@ -17,10 +15,21 @@
 	let inicioX = 0;
 	let inicioScroll = 0;
 	let dragged = false;
+	let arrastrando = $state(false);
+	let pausado = $state(false);
 	let resumeTimer: ReturnType<typeof setTimeout> | null = null;
 
 	function anchoTarjeta() {
 		return carrusel ? carrusel.scrollWidth / track.length : 0;
+	}
+
+	function actualizarCentro() {
+		const el = carrusel;
+		if (!el) return;
+		const ancho = anchoTarjeta();
+		if (!ancho) return;
+		const centroViewport = el.scrollLeft + el.clientWidth / 2;
+		indiceCentro = Math.round((centroViewport - ancho / 2) / ancho);
 	}
 
 	function animar(t: number) {
@@ -28,40 +37,20 @@
 		if (!el) return;
 		if (!pausado) {
 			const dt = Math.min(t - ultimoT, 50);
-			el.scrollLeft += VELOCIDAD * dt;
+			const paso = (VELOCIDAD_SEG * Math.sqrt(el.clientWidth) * dt) / 1000;
+			el.scrollLeft += paso;
 			const mitad = el.scrollWidth / 2;
 			if (el.scrollLeft >= mitad) el.scrollLeft -= mitad;
+			actualizarCentro();
 		}
 		ultimoT = t;
 		frame = requestAnimationFrame(animar);
 	}
 
-	function pausar() {
-		if (resumeTimer) {
-			clearTimeout(resumeTimer);
-			resumeTimer = null;
-		}
-		pausado = true;
-	}
-
-	function reanudar() {
-		if (resumeTimer) clearTimeout(resumeTimer);
-		resumeTimer = setTimeout(() => {
-			if (!arrastrando) pausado = false;
-		}, 2000);
-	}
-
-	function onScroll() {
-		const el = carrusel;
-		if (!el) return;
-		const ancho = anchoTarjeta();
-		if (!ancho) return;
-		indiceActivo = Math.round(el.scrollLeft / ancho) % servicios.length;
-	}
-
 	function onPointerDown(e: PointerEvent) {
 		if (reducedMotion) return;
-		pausar();
+		if ((e.target as Element | null)?.closest('a')) return;
+		pausado = true;
 		arrastrando = true;
 		dragged = false;
 		inicioX = e.clientX;
@@ -79,9 +68,13 @@
 	}
 
 	function onPointerUp() {
+		if (!arrastrando) return;
 		arrastrando = false;
 		carrusel?.classList.remove('drag');
-		reanudar();
+		if (resumeTimer) clearTimeout(resumeTimer);
+		resumeTimer = setTimeout(() => {
+			pausado = false;
+		}, 800);
 	}
 
 	function onClick(e: MouseEvent) {
@@ -89,34 +82,6 @@
 			e.preventDefault();
 			dragged = false;
 		}
-	}
-
-	function onKeyDown(e: KeyboardEvent) {
-		if (e.key === 'ArrowLeft') {
-			e.preventDefault();
-			deslizar(-1);
-		} else if (e.key === 'ArrowRight') {
-			e.preventDefault();
-			deslizar(1);
-		}
-	}
-
-	function deslizar(dir: -1 | 1) {
-		if (reducedMotion) return;
-		const el = carrusel;
-		if (!el) return;
-		pausar();
-		el.scrollBy({ left: dir * anchoTarjeta(), behavior: 'smooth' });
-		reanudar();
-	}
-
-	function irA(indice: number) {
-		if (reducedMotion) return;
-		const el = carrusel;
-		if (!el) return;
-		pausar();
-		el.scrollTo({ left: indice * anchoTarjeta(), behavior: 'smooth' });
-		reanudar();
 	}
 
 	$effect(() => {
@@ -137,23 +102,18 @@
 		el.addEventListener('pointermove', onPointerMove);
 		el.addEventListener('pointerup', onPointerUp);
 		el.addEventListener('pointercancel', onPointerUp);
-		el.addEventListener('pointerenter', pausar);
-		el.addEventListener('pointerleave', reanudar);
+		el.addEventListener('scroll', actualizarCentro);
 		el.addEventListener('click', onClick);
-		el.addEventListener('scroll', onScroll);
-		el.addEventListener('keydown', onKeyDown);
 
 		return () => {
 			cancelAnimationFrame(frame);
+			if (resumeTimer) clearTimeout(resumeTimer);
 			el.removeEventListener('pointerdown', onPointerDown);
 			el.removeEventListener('pointermove', onPointerMove);
 			el.removeEventListener('pointerup', onPointerUp);
 			el.removeEventListener('pointercancel', onPointerUp);
-			el.removeEventListener('pointerenter', pausar);
-			el.removeEventListener('pointerleave', reanudar);
+			el.removeEventListener('scroll', actualizarCentro);
 			el.removeEventListener('click', onClick);
-			el.removeEventListener('scroll', onScroll);
-			el.removeEventListener('keydown', onKeyDown);
 		};
 	});
 </script>
@@ -163,56 +123,28 @@
 	<p>Áreas de práctica en las que podemos ayudarte.</p>
 
 	<div class="carrusel-wrapper">
-		<button type="button" class="flecha flecha-izq" aria-label="Servicios anteriores" onclick={() => deslizar(-1)}>
-			<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-				<path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-			</svg>
-		</button>
-
 		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 		<div
 			class="carrusel"
 			role="region"
-			aria-label="Lista de servicios, desliza para ver más"
+			aria-label="Lista de servicios"
 			tabindex="0"
 			bind:this={carrusel}
 		>
 			<div class="carrusel-track">
 				{#each track as servicio, i (i)}
-					<article class="card">
+					<article class="card" class:centro={i === indiceCentro}>
 						<h3>{servicio.titulo}</h3>
 						<p>{servicio.descripcion}</p>
-						<a href="#contacto">Consultar por este servicio</a>
+						<a href="#contacto" onclick={() => (ui.servicioInteres = servicio.slug)}>Consultar por este servicio</a>
 					</article>
 				{/each}
 			</div>
 		</div>
-
-		<button type="button" class="flecha flecha-der" aria-label="Siguientes servicios" onclick={() => deslizar(1)}>
-			<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-				<path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-			</svg>
-		</button>
-	</div>
-
-	<div class="indicadores" role="tablist" aria-label="Ir a un servicio">
-		{#each servicios as servicio, i (servicio.titulo)}
-			<button
-				type="button"
-				class="punto"
-				class:activo={indiceActivo === i}
-				aria-label={`Ir al servicio: ${servicio.titulo}`}
-				onclick={() => irA(i)}
-			></button>
-		{/each}
 	</div>
 </section>
 
 <style>
-	.carrusel-wrapper {
-		position: relative;
-	}
-
 	.carrusel {
 		overflow-x: auto;
 		scrollbar-width: none;
@@ -229,6 +161,10 @@
 	.carrusel-track {
 		display: flex;
 		width: max-content;
+	}
+
+	.card a {
+		color: var(--blue-dark);
 	}
 
 	:global(.carrusel.drag) {
@@ -264,72 +200,13 @@
 	}
 
 	.card:hover {
-		transform: scale(1.05);
-		border-color: var(--blue-light);
-		box-shadow: 0 8px 20px rgb(2 102 193 / 0.25);
+		transform: scale(1.02);
 	}
 
-	.flecha {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		z-index: 2;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 2.5rem;
-		height: 2.5rem;
-		border: none;
-		border-radius: 50%;
-		background-color: var(--blue-primary);
-		color: var(--text-white);
-		cursor: pointer;
-		box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
-		opacity: 0.9;
-		transition:
-			opacity 0.2s ease,
-			background-color 0.2s ease;
-	}
-
-	.flecha:hover {
-		opacity: 1;
-		background-color: var(--blue-dark);
-	}
-
-	.flecha-izq {
-		left: 0.25rem;
-	}
-
-	.flecha-der {
-		right: 0.25rem;
-	}
-
-	.indicadores {
-		display: flex;
-		justify-content: center;
-		gap: 0.5rem;
-		margin-top: 0.5rem;
-	}
-
-	.punto {
-		width: 0.75rem;
-		height: 0.75rem;
-		padding: 0;
-		border: none;
-		border-radius: 50%;
-		background-color: var(--silver-dark);
-		cursor: pointer;
-		transition:
-			background-color 0.3s ease,
-			transform 0.3s ease;
-	}
-
-	.punto:hover {
-		transform: scale(1.25);
-	}
-
-	.punto.activo {
-		background-color: var(--blue-light);
+	.card.centro {
+		transform: scale(1.1);
+		position: relative;
+		z-index: 1;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -343,9 +220,9 @@
 			width: auto;
 		}
 
-		.flecha,
-		.indicadores {
-			display: none;
-		}
+.card,
+	.card.centro {
+		transform: none;
+	}
 	}
 </style>
